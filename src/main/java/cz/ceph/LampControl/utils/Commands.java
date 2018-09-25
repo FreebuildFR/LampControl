@@ -8,7 +8,7 @@ package cz.ceph.LampControl.utils;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
-import cz.ceph.LampControl.Main;
+import cz.ceph.LampControl.LampControl;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -21,9 +21,9 @@ import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
 
-    private Main main;
+    private LampControl main;
 
-    public Commands(Main main) {
+    public Commands(LampControl main) {
         this.main = main;
     }
 
@@ -31,7 +31,7 @@ public class Commands implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 1) {
             if (!args[0].equalsIgnoreCase("off")) {
-                sender.sendMessage(ChatColor.YELLOW + "-- " + Main.pluginInfo.getName() + " v" + Main.pluginInfo.getVersion() + " --");
+                sender.sendMessage(ChatColor.YELLOW + "-- " + LampControl.pluginInfo.getName() + " v" + LampControl.pluginInfo.getVersion() + " --");
                 sender.sendMessage(ChatColor.RED + "/lamp or //lamp - Will turn on selected lamps");
                 sender.sendMessage(ChatColor.RED + "/lamp off or //lamp off - Will turn off selected lamps");
                 return true;

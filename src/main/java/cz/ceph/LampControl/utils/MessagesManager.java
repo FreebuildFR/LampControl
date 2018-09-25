@@ -5,7 +5,7 @@
 */
 package cz.ceph.LampControl.utils;
 
-import cz.ceph.LampControl.Main;
+import cz.ceph.LampControl.LampControl;
 import org.bukkit.ChatColor;
 
 /**
@@ -34,7 +34,7 @@ public enum MessagesManager {
 
     public String toString() {
         if (this == PREFIX)
-            return ChatColor.translateAlternateColorCodes('&', Main.messagesConfig.getString(this.path, def)) + " ";
-        return ChatColor.translateAlternateColorCodes('&', Main.messagesConfig.getString(this.path, def));
+            return ChatColor.translateAlternateColorCodes('&', LampControl.messagesConfig.getString(this.path, def)) + " ";
+        return ChatColor.translateAlternateColorCodes('&', LampControl.messagesConfig.getString(this.path, def));
     }
 }

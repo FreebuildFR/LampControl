@@ -5,7 +5,7 @@
 */
 package cz.ceph.LampControl.utils;
 
-import cz.ceph.LampControl.Main;
+import cz.ceph.LampControl.LampControl;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -59,11 +59,11 @@ public class SwitchBlock {
     }
 
     private Object getNMCWorld(Object cW) throws ClassNotFoundException {
-        return Class.forName("net.minecraft.server." + Main.getNMSVersion() + ".World", false, Main.class.getClassLoader()).cast(cW);
+        return Class.forName("net.minecraft.server." + LampControl.getNMSVersion() + ".World", false, LampControl.class.getClassLoader()).cast(cW);
     }
 
     private Object getCraftWorld(Object worldInstance) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        return Class.forName("org.bukkit.craftbukkit." + Main.getNMSVersion() + ".CraftWorld", false, Main.class.getClassLoader()).cast(worldInstance);
+        return Class.forName("org.bukkit.craftbukkit." + LampControl.getNMSVersion() + ".CraftWorld", false, LampControl.class.getClassLoader()).cast(worldInstance);
     }
 
     private Object getInstanceOfCW(Object cW) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

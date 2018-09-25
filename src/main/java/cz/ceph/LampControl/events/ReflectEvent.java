@@ -1,6 +1,6 @@
 package cz.ceph.LampControl.events;
 
-import cz.ceph.LampControl.Main;
+import cz.ceph.LampControl.LampControl;
 import cz.ceph.LampControl.utils.MessagesManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
@@ -16,10 +16,10 @@ import java.lang.reflect.Method;
 
 public class ReflectEvent {
 
-    private Main javaPlugin;
+    private LampControl javaPlugin;
     private Listener listener;
 
-    public ReflectEvent(Main javaPlugin) {
+    public ReflectEvent(LampControl javaPlugin) {
         this.javaPlugin = javaPlugin;
     }
 

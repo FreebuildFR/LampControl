@@ -1,7 +1,7 @@
 package cz.ceph.LampControl.listeners;
 
 
-import cz.ceph.LampControl.Main;
+import cz.ceph.LampControl.LampControl;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,9 +9,9 @@ import org.bukkit.event.block.BlockPhysicsEvent;
 
 
 public class LampListener implements Listener {
-    private Main plugin;
+    private LampControl plugin;
 
-    public LampListener(Main p) {
+    public LampListener(LampControl p) {
         this.plugin = p;
     }
 
@@ -19,7 +19,7 @@ public class LampListener implements Listener {
     public void onBlockPhysics(BlockPhysicsEvent e) {
         boolean lamp = e.getBlock().getType().equals(Material.REDSTONE_LAMP_ON);
 
-        if (!Main.woodPlateControl || !Main.stonePlateControl || lamp && !plugin.containMaterials(e.getChangedType())) {
+        if (!LampControl.woodPlateControl || !LampControl.stonePlateControl || lamp && !plugin.containMaterials(e.getChangedType())) {
                 e.setCancelled(true);
         }
     }
