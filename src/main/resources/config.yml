@@ -1,0 +1,40 @@
+#
+#	LampControl Config File
+#	=====================================
+#
+#	Plugin by Ceph adapted from jacklink01
+#
+#	Need a new config file? Just delete this one and a new one will be created.
+#
+
+# The item ID of the item with which you would like players to be able to turn on lamps.
+# (default: flint/steel 259)
+lampControlItem: 259
+
+# If set to true, then LampControl will check if players have permission, otherwise it will let everyone control lamps.
+usePermissions: true
+
+# In the event that you would like to prevent plates from affecting lamps, you may set these to false.
+woodPlateControl: true
+stonePlateControl: true
+
+# When this is set to true, OP'd players can use their hand to control the lamps in addition to the item above.
+# You may also give a player or group the 'lampcontrol.hand' permission.
+opUsesHand: true
+
+# Toggle the lamps on/off with your item/hand! If off, lamps will turn ON, but not off.
+toggleLamps: true
+
+# Toggle the rails on/off with your item/hand! If off, rails will turn ON, but not off.
+controlRails: true
+
+# Take the item from the player after they use it to turn on a lamp
+takeItemOnUse: false
+
+# Don't edit this or I, your God, will reset this config.
+config-version: 6
+
+# And, there are some permissions for you :P
+# lampcontrol.use -> Basic permission for using this plugin
+# lampcontrol.worldedit -> Allows using WorldEdit to turn on/off lamps
+# lampcontrol.hand -> Needed for ON/OFF lamps with hand

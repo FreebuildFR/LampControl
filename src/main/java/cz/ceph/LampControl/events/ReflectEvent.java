@@ -1,7 +1,7 @@
-package cz.ceph.lampcontrol.events;
+package cz.ceph.LampControl.events;
 
-import cz.ceph.lampcontrol.LampControl;
-import cz.ceph.lampcontrol.utils.ChatWriter;
+import cz.ceph.LampControl.LampControl;
+import cz.ceph.LampControl.utils.MessagesManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
@@ -11,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * Created by SiOnzee on 17.07.2016.
+ * Created by Ceph on 17.07.2016.
  */
 
 public class ReflectEvent {
@@ -34,7 +34,6 @@ public class ReflectEvent {
     public void registerPlayerInteractEvent(Callback function) {
         boolean isTwoHandVersion = false;
         Class<? extends Event> playerInteractEvent = null;
-
         try {
             playerInteractEvent = (Class<? extends Event>) Class.forName("org.bukkit.event.player.PlayerInteractEvent", false, javaPlugin.getClass().getClassLoader());
             isTwoHandVersion = playerInteractEvent.getDeclaredMethod("getHand") != null;
@@ -46,7 +45,7 @@ public class ReflectEvent {
 
         if (playerInteractEvent == null)
             try {
-                throw new Exception(ChatWriter.prefix("PlayerInteractEvent not found. Try contacting developer with log."));
+                throw new Exception(MessagesManager.PREFIX + "PlayerInteractEvent not found. Try contacting developer with log.");
             } catch (Exception e) {
                 e.printStackTrace();
                 return;
@@ -54,7 +53,6 @@ public class ReflectEvent {
 
         boolean finalIsTwoHandVersion = isTwoHandVersion;
         Bukkit.getPluginManager().registerEvent(playerInteractEvent, listener, EventPriority.NORMAL, (listener, event) -> {
-
             if (finalIsTwoHandVersion) {
                 try {
                     Method m = event.getClass().getDeclaredMethod("getHand");

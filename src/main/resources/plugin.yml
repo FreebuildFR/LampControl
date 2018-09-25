@@ -1,0 +1,14 @@
+name: LampControl
+author: Ceph
+version: ${spigot.plugin.version}
+main: cz.ceph.LampControl.LampControl
+
+commands:
+   lamp:
+      description: Turn on/off lamps with WorldEdit
+      usage: /<command> [off]
+      aliases: [lc, lampcontrol]
+   /lamp:
+      description: Turn on/off lamps with WorldEdit
+      usage: /<command> [off]
+      aliases: [/lc, /lampcontrol]
