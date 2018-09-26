@@ -53,7 +53,7 @@ public class ReflectPlayerInteractEvent implements ReflectEvent.Callback {
             }
         }
 
-        if (e.getClickedBlock().getType().equals(Material.REDSTONE_LAMP_ON)) {
+        if (e.getClickedBlock().getType().equals(Material.REDSTONE_LAMP)) {
             if (LampControl.usePermissions && !e.getPlayer().hasPermission("lampcontrol.use")) return;
 
             if (!LampControl.toggleLamps) return;
@@ -64,13 +64,13 @@ public class ReflectPlayerInteractEvent implements ReflectEvent.Callback {
             BlockState blockState = b.getState();
 
             plugin.getSwitchBlock().initWorld(b.getWorld());
-            plugin.getSwitchBlock().switchLamp(b, false);
+            plugin.getSwitchBlock().switchLamp(b);
 
-            BlockPlaceEvent checkBuildPerms = new BlockPlaceEvent(b, blockState, b, new ItemStack(Material.REDSTONE_LAMP_OFF), e.getPlayer(), true);
+            BlockPlaceEvent checkBuildPerms = new BlockPlaceEvent(b, blockState, b, new ItemStack(Material.REDSTONE_LAMP), e.getPlayer(), true);
             Bukkit.getPluginManager().callEvent(checkBuildPerms);
 
             if (checkBuildPerms.isCancelled()) {
-                plugin.getSwitchBlock().switchLamp(b, false);
+                plugin.getSwitchBlock().switchLamp(b);
                 e.getPlayer().sendMessage(MessagesManager.PREFIX + MessagesManager.NO_PERMS.toString());
                 return;
             }
@@ -82,34 +82,6 @@ public class ReflectPlayerInteractEvent implements ReflectEvent.Callback {
             }
 
             playSound(e.getClickedBlock().getLocation(), 0.5F, 0F);
-        } else if (e.getClickedBlock().getType().equals(Material.REDSTONE_LAMP_OFF)) {
-
-            e.setCancelled(true);
-
-            if (LampControl.usePermissions && !e.getPlayer().hasPermission("lampcontrol.use")) return;
-
-            Block b = e.getClickedBlock();
-            BlockState blockState = b.getState();
-
-            plugin.getSwitchBlock().initWorld(b.getWorld());
-            plugin.getSwitchBlock().switchLamp(b, true);
-
-            BlockPlaceEvent checkBuildPerms = new BlockPlaceEvent(b, blockState, b, new ItemStack(Material.REDSTONE_LAMP_ON), e.getPlayer(), true);
-            Bukkit.getPluginManager().callEvent(checkBuildPerms);
-
-            if (checkBuildPerms.isCancelled()) {
-                plugin.getSwitchBlock().switchLamp(b, true);
-                e.getPlayer().sendMessage(MessagesManager.PREFIX + MessagesManager.NO_PERMS.toString());
-                return;
-            }
-
-            if (LampControl.takeItemOnUse) {
-                ItemStack item = e.getPlayer().getItemInHand();
-                item.setAmount(item.getAmount() - 1);
-                e.getPlayer().setItemInHand(null);
-            }
-
-            playSound(e.getClickedBlock().getLocation(), 0.5F, 1F);
         }
 
         // Rails section
@@ -140,14 +112,14 @@ public class ReflectPlayerInteractEvent implements ReflectEvent.Callback {
 
                             if (railBlock.getType().equals(Material.POWERED_RAIL) && railData < 7) {
                                 plugin.getSwitchBlock().initWorld(railBlock.getWorld());
-                                plugin.getSwitchBlock().switchRail(railBlock, true);
+                                plugin.getSwitchBlock().switchRail(railBlock);
                             } else {
                                 break innerForEach;
                             }
                         }
                     }
                     plugin.getSwitchBlock().initWorld(b.getWorld());
-                    plugin.getSwitchBlock().switchRail(b, true);
+                    plugin.getSwitchBlock().switchRail(b);
                 }
 
                 if (LampControl.takeItemOnUse) {
@@ -167,7 +139,7 @@ public class ReflectPlayerInteractEvent implements ReflectEvent.Callback {
                     return;
                 } else {
                     plugin.getSwitchBlock().initWorld(b.getWorld());
-                    plugin.getSwitchBlock().switchRail(b, false);
+                    plugin.getSwitchBlock().switchRail(b);
                 }
 
                 if (LampControl.takeItemOnUse) {

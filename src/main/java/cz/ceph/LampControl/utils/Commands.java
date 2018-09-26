@@ -70,7 +70,7 @@ public class Commands implements CommandExecutor {
                                 Location loc = new Location(min.getWorld(), x, y, z);
                                 if (!checkForSelection || selection.contains(loc)) {
                                     Block block = min.getWorld().getBlockAt(loc);
-                                    if (block.getType().equals(Material.REDSTONE_LAMP_OFF)) {
+                                    if (block.getType().equals(Material.REDSTONE_LAMP)) {
                                         try {
                                             main.getSwitchBlock().switchLamp(block, true);
                                         } catch (Exception e) {
@@ -128,7 +128,7 @@ public class Commands implements CommandExecutor {
                                     Location loc = new Location(min.getWorld(), x, y, z);
                                     if (!checkForSelection || selection.contains(loc)) {
                                         Block block = min.getWorld().getBlockAt(loc);
-                                        if (block.getType().equals(Material.REDSTONE_LAMP_ON)) {
+                                        if (block.getType().equals(Material.REDSTONE_LAMP)) {
                                             try {
                                                 main.getSwitchBlock().switchLamp(block, false);
                                             } catch (Exception e) {

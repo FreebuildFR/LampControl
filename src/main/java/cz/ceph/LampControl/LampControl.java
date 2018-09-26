@@ -26,7 +26,7 @@ public class LampControl extends JavaPlugin {
     public static boolean opUsesHand = true, toggleLamps = true, takeItemOnUse = false, usePermissions = false, woodPlateControl = false, stonePlateControl = false, controlRails = true;
     public static PluginDescriptionFile pluginInfo;
     public static YamlConfiguration messagesConfig;
-    private static final int CONFIG_VERSION = 6;
+    private static final int CONFIG_VERSION = 7;
 
     public Material toolMaterial;
     private ReflectEvent reflectEvent;
@@ -84,36 +84,43 @@ public class LampControl extends JavaPlugin {
         rMats.add(Material.POWERED_RAIL);
         rMats.add(Material.REDSTONE_WIRE);
         rMats.add(Material.REDSTONE_BLOCK);
-        rMats.add(Material.PISTON_MOVING_PIECE);
-        rMats.add(Material.REDSTONE_TORCH_OFF);
-        rMats.add(Material.REDSTONE_TORCH_ON);
-        rMats.add(Material.DIODE_BLOCK_OFF);
-        rMats.add(Material.DIODE_BLOCK_ON);
-        rMats.add(Material.REDSTONE_COMPARATOR_OFF);
-        rMats.add(Material.REDSTONE_COMPARATOR_ON);
-        rMats.add(Material.DIODE_BLOCK_ON);
+        rMats.add(Material.PISTON);
+        rMats.add(Material.REDSTONE_TORCH);
+        rMats.add(Material.REDSTONE_WALL_TORCH);
+        rMats.add(Material.REPEATER);
+        rMats.add(Material.COMPARATOR);
         rMats.add(Material.LEVER);
         rMats.add(Material.STONE_BUTTON);
-        rMats.add(Material.WOOD_BUTTON);
-        rMats.add(Material.GOLD_PLATE);
-        rMats.add(Material.IRON_PLATE);
+        rMats.add(Material.BIRCH_BUTTON);
+        rMats.add(Material.ACACIA_BUTTON);
+        rMats.add(Material.DARK_OAK_BUTTON);
+        rMats.add(Material.JUNGLE_BUTTON);
+        rMats.add(Material.OAK_BUTTON);
+        rMats.add(Material.SPRUCE_BUTTON);
+        rMats.add(Material.HEAVY_WEIGHTED_PRESSURE_PLATE);
+        rMats.add(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
         rMats.add(Material.TRIPWIRE);
         rMats.add(Material.TRIPWIRE_HOOK);
         rMats.addAll(Arrays.stream(Material.values()).filter(mat -> mat.toString().equalsIgnoreCase("DAYLIGHT_DETECTOR") || mat.toString().equalsIgnoreCase("DAYLIGHT_DETECTOR_INVERTED")).collect(Collectors.toList()));
-        if (stonePlateControl)
-            rMats.add(Material.WOOD_PLATE);
+        if (stonePlateControl) {
+            rMats.add(Material.BIRCH_PRESSURE_PLATE);
+            rMats.add(Material.ACACIA_PRESSURE_PLATE);
+            rMats.add(Material.DARK_OAK_PRESSURE_PLATE);
+            rMats.add(Material.JUNGLE_PRESSURE_PLATE);
+            rMats.add(Material.OAK_PRESSURE_PLATE);
+            rMats.add(Material.SPRUCE_PRESSURE_PLATE);
+        }
         if (woodPlateControl)
-            rMats.add(Material.STONE_PLATE);
+            rMats.add(Material.STONE_PRESSURE_PLATE);
     }
 
     // Load config from the file
-    @SuppressWarnings("deprecation")
     private void loadConfig() {
         if (!new File(getDataFolder(), "config.yml").exists()) {
             saveDefaultConfig();
         }
         reloadConfig();
-        toolMaterial = Material.getMaterial(getConfig().getInt("lampControlItem"));
+        toolMaterial = Material.getMaterial(getConfig().getString("lampControlItem"));
         usePermissions = getConfig().getBoolean("usePermissions");
         woodPlateControl = getConfig().getBoolean("woodPlateControl");
         stonePlateControl = getConfig().getBoolean("stonePlateControl");

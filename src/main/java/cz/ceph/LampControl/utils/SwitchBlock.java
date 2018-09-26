@@ -6,9 +6,10 @@
 package cz.ceph.LampControl.utils;
 
 import cz.ceph.LampControl.LampControl;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Lightable;
+import org.bukkit.block.data.Powerable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -40,7 +41,7 @@ public class SwitchBlock {
         isClientSideField.setAccessible(true);
     }
 
-    public void setStatic(boolean value) {
+    private void setStatic(boolean value) {
         try {
             isClientSideField.set(craftWorld, value);
         } catch (IllegalAccessException e) {
@@ -48,14 +49,20 @@ public class SwitchBlock {
         }
     }
 
-    public void switchLamp(Block block, boolean light) {
-        if(light) {
-            setStatic(true);
-            block.setType(Material.REDSTONE_LAMP_ON);
-            setStatic(false);
-        } else {
-            block.setType(Material.REDSTONE_LAMP_OFF);
-        }
+    public void switchLamp(Block block) {
+        Lightable lightable = (Lightable) block.getState().getBlockData();
+        setStatic(true);
+        lightable.setLit(!lightable.isLit());
+        block.getState().setBlockData(lightable);
+        setStatic(false);
+    }
+
+    void switchLamp(Block block, boolean lit) {
+        Lightable lightable = (Lightable) block.getState().getBlockData();
+        setStatic(true);
+        lightable.setLit(lit);
+        block.getState().setBlockData(lightable);
+        setStatic(false);
     }
 
     private Object getNMCWorld(Object cW) throws ClassNotFoundException {
@@ -70,20 +77,10 @@ public class SwitchBlock {
         return cW.getClass().getDeclaredMethod("getHandle").invoke(cW);
     }
 
-    public void switchRail(Block block, boolean power) {
-        try {
-            int data = (int) block.getData();
-            if (power) {
-                data = data + 8;
-                setStatic(true);
-                block.setTypeIdAndData(27, (byte) data, false);
-                setStatic(false);
-            } else {
-                data = data - 8;
-                block.setTypeIdAndData(27, (byte) data, false);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void switchRail(Block block) {
+        Powerable powerable = (Powerable) block.getState().getBlockData();
+        setStatic(true);
+        powerable.setPowered(!powerable.isPowered());
+        setStatic(false);
     }
 }

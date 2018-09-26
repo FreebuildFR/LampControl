@@ -2,14 +2,15 @@
 #	LampControl Config File
 #	=====================================
 #
-#	Plugin by Ceph adapted from jacklink01
+#	Plugin by Darkilen adapted from Ceph adapted from jacklink01
 #
 #	Need a new config file? Just delete this one and a new one will be created.
 #
 
-# The item ID of the item with which you would like players to be able to turn on lamps.
-# (default: flint/steel 259)
-lampControlItem: 259
+# The Material name of the item with which you would like players to be able to turn on lamps.
+# You can find Material list here : https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+# (default: FLINT_AND_STEEL)
+lampControlItem: FLINT_AND_STEEL
 
 # If set to true, then LampControl will check if players have permission, otherwise it will let everyone control lamps.
 usePermissions: true
@@ -32,7 +33,7 @@ controlRails: true
 takeItemOnUse: false
 
 # Don't edit this or I, your God, will reset this config.
-config-version: 6
+config-version: 7
 
 # And, there are some permissions for you :P
 # lampcontrol.use -> Basic permission for using this plugin
